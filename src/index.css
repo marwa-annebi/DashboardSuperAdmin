@@ -1,13 +1,84 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: "CeraPro-Black";
+  font-style: normal;
+  font-weight: 900;
+  src: url("./fonts/CeraProBlack.otf") format("opentype");
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: "CeraPro-Medium";
+  font-style: normal;
+  font-weight: 500;
+  src: url("./fonts/CeraProMedium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "CeraPro-Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("./fonts/CeraProBold.otf") format("opentype");
+}
+
+.App {
+  font-family: "cerapro-bold";
+  width: 100vw;
+  height: 100vh;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: white;
+}
+/* .outletForm {
+  align-items: flex-start;
+  border: 5px solid #a9a9a9;
+  border-radius: 35px;
+  box-shadow: 0px 3px 6px #00000029;
+  display: flex;
+  padding: 31px 25px;
+  justify-content: flex-start;
+  margin-left: -600px;
+  width: 920px;
+  min-height: 460px;
+  padding: 31px 15px;
+} */
+.border {
+  align-items: flex-start;
+  border: 5px solid #a9a9a9;
+
+  border-radius: 35px;
+  box-shadow: 0px 3px 6px #00000029;
+
+  display: flex;
+  /* padding: 31px 25px; */
+  justify-content: flex-start;
+  margin-left: -600px;
+  width: 920px;
+  min-height: 460px;
+  padding: 31px 15px;
+}
+
+.content {
+  min-height: 460px;
+  width: 1000px;
+  min-width: 170px;
+}
+
+.display-swatches {
+  /* margin-right: -10px */
+  text-align: center;
+  display: flex;
+  /* justify-content: ; */
+}
+.png-or-jpg-only {
+  color: #1c1312;
+  font-family: var(--font-family-cerapro-bold);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 60px;
+  min-height: 27px;
+  opacity: 0.68;
+  white-space: nowrap;
+  margin-left: 80px;
 }

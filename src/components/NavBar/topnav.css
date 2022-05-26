@@ -1,0 +1,115 @@
+.topnav {
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 30px;
+    /* background-color: ; */
+}
+.searchTerm {
+    width: 100%;
+    border: 3px solid white;
+    border-right: none;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #9DBFAF;
+  }
+
+.topnav__search {
+    position: relative;
+    height: 50px;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    border-radius:20px;
+    overflow: hidden;
+    margin-top:30px;
+    margin-left: 80px;
+    padding-left: -55px;
+    box-shadow:rgba(149, 157, 165, 0.2) 0px 8px 24px
+    /* background-color: #570B03;  */
+
+}
+
+.topnav__search > input {
+    height: 100%;
+    width: 100%;
+    padding: 10px 60px 10px 20px;
+    font-size: 1rem;
+    border-radius: 15px;
+    color: rgb(82, 44, 44);
+    background-color:  #ffffff;
+}
+
+.topnav__search > i {
+    font-size: 1.5rem;
+    position: absolute;
+    right: 20px;
+}
+
+.topnav__right {
+    display: flex;
+    align-items: center;
+}
+
+.topnav__right-item ~ .topnav__right-item {
+    margin-left: 30px;
+}
+
+.notification-item {
+    margin-top:20px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin-right: 0.5px;
+    font-size: 2.5rem;
+    color: #570B03
+}
+
+.notification-item:hover {
+    background-color: #fafafb;
+}
+
+.notification-item > i {
+    margin-right: 20px;
+    font-size: 1.5rem;
+}
+.iconLogout{
+    color: #570B03;
+    margin-top:20px;
+    align-items: center;
+    width: 40px;
+    height: 51px;
+    border-radius: 30px 1px;
+    margin-right: 10px;
+    font-size: 1rem;
+}
+.IoSearchOutline{
+    font-size :2.5rem;
+    padding: 20px;
+    color: #570B03;
+}
+
+.topnav__right-user {
+    display: flex;
+    align-items: center;
+}
+
+.topnav__right-user__image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.topnav__right-user__image > img {
+    width: 100%;
+}
+
+.topnav__right-user__name {
+    font-size: 1rem;
+    font-weight: 600;
+}
