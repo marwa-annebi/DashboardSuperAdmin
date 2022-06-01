@@ -1,6 +1,6 @@
 import { Badge, Button, Grid, IconButton, makeStyles } from "@material-ui/core";
 import { AppBar, Box, Container, Toolbar, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { IoLogOut } from "react-icons/io5";
 import { IoMdAddCircle } from "react-icons/io";
 import { RiNotification2Fill } from "react-icons/ri";
@@ -8,6 +8,7 @@ import { IconContext } from "react-icons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import logo from "./../../assets/Groupe 40.svg";
+// S
 const styles = makeStyles({
   overlapGroup5: {
     alignItems: "center",
@@ -17,7 +18,7 @@ const styles = makeStyles({
     height: "51px",
     marginBottom: "-20px",
     marginRight: "20px",
-    marginLeft: "-100px",
+    marginLeft: "-160px",
     width: "55px",
     padding: "4px 3px 4px 4px",
   },
@@ -45,7 +46,7 @@ const styles = makeStyles({
     height: "50px",
     justifyContent: "flex-end",
     width: "210px",
-    marginLeft: "-5px",
+    marginLeft: "-10px",
   },
   iconLogout: {
     backgroundColor: "#1c1312",
@@ -70,7 +71,11 @@ const styles = makeStyles({
   },
 });
 export default function NavBar() {
+  // const auth = useAuth();
   const navigate = useNavigate();
+  // const handleLogout = () => {
+  //   auth.logout();
+  // };
   const logoutHandler = async () => {
     const config = {
       headers: {
@@ -78,10 +83,14 @@ export default function NavBar() {
       },
     };
     await axios.get("/auth/logout", config);
+    localStorage.clear();
     localStorage.removeItem("adminInfo");
+    // auth.logout();
     navigate("/login");
+    // window.location.reload(true);
   };
   const classes = styles();
+
   return (
     <AppBar style={{ backgroundColor: "white" }} elevation="0">
       <Container>

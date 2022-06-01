@@ -1,10 +1,12 @@
 import React from "react";
 import { Button as MuiButton, makeStyles } from "@material-ui/core";
+import { BiBorderRadius } from "react-icons/bi";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: theme.spacing(0.5),
-    fontFamily:"cerapro-Medium"
+    fontFamily: "cerapro-Medium",
+    BorderRadius:"20px"
 
   },
   label: {

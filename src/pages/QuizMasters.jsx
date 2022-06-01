@@ -19,6 +19,7 @@ import Modal from "@mui/material/Modal";
 import { Button, makeStyles } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
+
 import CloseIcon from "@material-ui/icons/Close";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -32,7 +33,7 @@ import Content from "../Content";
 import Loading from "./../components/Loading";
 import controls from "../components/Controls/controls";
 import EditUser from "./EditUser";
-
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
 const headCells = [
   { id: "", label: "" },
   { id: "firstName", label: "FirstName" },
@@ -43,6 +44,7 @@ const headCells = [
 ];
 
 export default function QuizMasters() {
+  const [isLoggedIn, setIsLoggedIn] = useState();
   const [QuizMasters, setQuizMasters] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
   const [recordForEdit, setRecordForEdit] = useState(null);
@@ -68,15 +70,22 @@ export default function QuizMasters() {
   // const handleClose = () => setOpen(false);
   const { TblContainer, TblHead, TblPagination, recordsAfterPagingAndSorting } =
     useTable(QuizMasters, headCells, filterFn);
-
+  let token = JSON.parse(localStorage.getItem("adminInfo"));
+  // let newToken = token.token;
+  // console.log("#token", token.token);
   const config = {
     headers: {
       "Content-type": "Application/json",
+      Authorization: `Bearer ${token.token}`,
     },
   };
+  // const getUser = () => {
+  //   setIsLoggedIn(JSON.parse(localStorage.getItem("adminInfo")));
+  // };
 
   const findQuizMasters = async () => {
     try {
+      console.log("hello");
       const result = await axios.get(
         "http://localhost:5000/admin/getUsers",
         config
@@ -84,7 +93,7 @@ export default function QuizMasters() {
 
       setQuizMasters(result.data.reverse());
 
-      // console.log(result.data.reverse());
+      console.log(QuizMasters);
     } catch (error) {
       console.log(error);
     }
@@ -103,6 +112,7 @@ export default function QuizMasters() {
         type: "success",
       });
     } catch (error) {
+      console.log("#error", error);
       if (
         error.response &&
         error.response.status >= 400 &&
@@ -132,6 +142,9 @@ export default function QuizMasters() {
             account: {
               domain_name: userInfo.domain_name,
               businessName: userInfo.businessName,
+              lightColor: userInfo.light,
+              darkColor: userInfo.dark,
+              logo: userInfo.logo,
             },
           },
           config
@@ -172,6 +185,9 @@ export default function QuizMasters() {
             account: {
               domain_name: userInfo.domain_name,
               businessName: userInfo.businessName,
+              lightColor: userInfo.light,
+              darkColor: userInfo.dark,
+              logo: userInfo.logo,
             },
           },
           config
@@ -200,8 +216,8 @@ export default function QuizMasters() {
 
     return (
       <React.Fragment>
-        <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-          <TableCell>
+        <TableRow>
+          <TableCell style={{ borderBottom: "3px solid #878787" ,borderBottomLeftRadius: "20%"}}>
             <IconButton
               aria-label="expand row"
               size="small"
@@ -211,11 +227,17 @@ export default function QuizMasters() {
             </IconButton>
           </TableCell>
 
-          <TableCell align="left">{row.firstName}</TableCell>
-          <TableCell align="left">{row.lastName}</TableCell>
-          <TableCell align="left">{row.email}</TableCell>
+          <TableCell align="left" style={{ borderBottom: "3px solid #878787" }}>
+            {row.firstName}
+          </TableCell>
+          <TableCell align="left" style={{ borderBottom: "3px solid #878787" }}>
+            {row.lastName}
+          </TableCell>
+          <TableCell align="left" style={{ borderBottom: "3px solid #878787" }}>
+            {row.email}
+          </TableCell>
 
-          <TableCell>
+          <TableCell style={{ borderBottom: "3px solid #878787" , borderRadius:"8px"}}>
             <Button
               color="primary"
               onClick={() => {
@@ -255,7 +277,9 @@ export default function QuizMasters() {
                   Details
                 </Typography>
                 <Table size="small" aria-label="purchases">
-                  <TableHead>
+                  <TableHead
+                    style={{ borderBottom: "4px solid var(--mahogany-3)" }}
+                  >
                     <TableRow>
                       <TableCell>Business_Name</TableCell>
                       <TableCell>Domain_name</TableCell>
@@ -269,8 +293,18 @@ export default function QuizMasters() {
                       <TableCell>{row.account.businessName}</TableCell>
                       <TableCell>{row.account.domain_name}</TableCell>
                       <TableCell>{row.account.lightColor}</TableCell>
-                      <TableCell>{row.account.darkColor}</TableCell>
-                      <TableCell>{row.account.logo}</TableCell>
+                      <TableCell align="left">
+                        {row.account.darkColor}
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          height: "10px",
+                          maxWidth: "10px",
+                          overflow: "scroll",
+                        }}
+                      >
+                        {row.account.logo}
+                      </TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
@@ -291,15 +325,6 @@ export default function QuizMasters() {
   return (
     <div className="outletForm">
       <Content>
-        <controls.Button
-          text="Add New"
-          variant="outlined"
-          startIcon={<AddIcon />}
-          onClick={() => {
-            setOpenPopup(true);
-            setRecordForEdit(null);
-          }}
-        />
         <TblContainer>
           <Table aria-label="collapsible table">
             <TblHead />
@@ -337,6 +362,17 @@ export default function QuizMasters() {
           />
         </TblContainer>
         <TblPagination />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <controls.Button
+            text="Add New"
+            color="#1D1D1D"
+            startIcon={<AddIcon />}
+            onClick={() => {
+              setOpenPopup(true);
+              setRecordForEdit(null);
+            }}
+          />
+        </div>
       </Content>
     </div>
   );

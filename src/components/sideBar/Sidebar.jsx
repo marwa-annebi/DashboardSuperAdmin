@@ -9,7 +9,8 @@ import {
   SettingOutlined,
   MoneyCollectOutlined,
 } from "@ant-design/icons";
-import { Link, NavLink } from "react-router-dom";
+import { Link, Navigate, NavLink } from "react-router-dom";
+import { useAuth } from "../Auth/isLogin";
 
 function getItem(label, key, icon) {
   return {
@@ -22,9 +23,9 @@ const items = [
   getItem(
     <NavLink
       className={({ isActive }) => (isActive ? "link-active" : "link")}
-      to="/dashboard"
+      to="/statistics"
     >
-      Dashboard
+      Statistics
     </NavLink>,
     "1"
   ),
@@ -68,6 +69,7 @@ const items = [
 ];
 
 const Sidebar = () => {
+  // const auth = useAuth();
   //   const [collapsed, setCollapsed] = React.useState(false);
 
   //   const toggleCollapsed = () => {
@@ -77,6 +79,7 @@ const Sidebar = () => {
   return (
     <div className="menu">
       <Menu className="sidemenu" mode="inline" theme="dark" items={items} />
+      {/*!auth.user && Navigate("/login")*/}
     </div>
   );
 };

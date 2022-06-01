@@ -12,6 +12,8 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import { textAlign } from "@mui/system";
+import { useAuth } from "./isLogin";
+import isLogin from "./isLogin";
 const styles = makeStyles({
   textField: {
     width: "65%",
@@ -37,18 +39,23 @@ const styles = makeStyles({
     whiteSpace: "nowrap",
   },
 });
-
 export default function LoginForm() {
   // const { switchToSignup } = useContext(AccountContext);
   const classes = styles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState("");
+  // const auth = useAuth();
   const [loading, setloading] = useState(false);
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
     type: "",
   });
+  // const handleLogin = () => {
+  //   auth.login(user);
+  //   navigate("/dashboard");
+  // };
   const navigate = useNavigate();
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -62,16 +69,18 @@ export default function LoginForm() {
       console.log("hello");
       const { data } = await axios.post(
         "http://localhost:5000/auth/loginAdmin",
-        { email, password, type: "1" }
+        { email, password, type: "1" },
+        config
       );
       console.log(data);
       localStorage.setItem("adminInfo", JSON.stringify(data));
       // console.log(userInfo);
       console.log("hello");
       if (data) {
-        navigate("/dashboard");
+        // isLogin();
+        navigate("/quizmasters");
+        //window.location.reload(true);
       }
-      // window.location.reload(true);
       setloading(false);
     } catch (error) {
       setloading(false);
@@ -107,7 +116,7 @@ export default function LoginForm() {
         vertical="top"
         horizontal="right"
       />
-      <h1 className="title">log in as Admin </h1>
+      <h1 className="title">log in as Admin</h1>
       <form
         onSubmit={submitHandler}
         style={{ flexDirection: "column", marginTop: "35px" }}
@@ -128,7 +137,7 @@ export default function LoginForm() {
         />
         <br />
         <TextField
-          type="password"
+          type={showPassword ? "text" : "password"}
           // class="form__field"
           label="Password"
           value={password}
@@ -156,7 +165,7 @@ export default function LoginForm() {
         <br />
         <Button
           type="submit"
-          style={{ marginTop: "25px", marginLeft: "230px" }}
+          style={{ marginTop: "25px", marginLeft: "260px" }}
         >
           <FaPlay className="iconPlay1" fontSize={"2em"} />
         </Button>

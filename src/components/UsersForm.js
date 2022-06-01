@@ -41,12 +41,6 @@ export default function UsersForm(props) {
   const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
     useForm(initialFValues, true, validate);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validate()) {
-      addOrEdit(values, resetForm);
-    }
-  };
   const postDetails = (pics) => {
     setPicMessage(null);
     if (pics.type === "image/jpeg" || pics.type === "image/png") {
@@ -72,6 +66,14 @@ export default function UsersForm(props) {
       return setPicMessage("Please Select an Image");
     }
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const light = lightColor.toString();
+    const dark = darkColor.toString();
+    if (validate()) {
+      addOrEdit({ ...values, dark, light, logo }, resetForm);
+    }
+  };
 
   useEffect(() => {
     if (recordForEdit != null)
@@ -90,6 +92,7 @@ export default function UsersForm(props) {
             value={values.firstName}
             onChange={handleInputChange}
             error={errors.firstName}
+            required
           ></controls.Input>
           <controls.Input
             label="Last name"
@@ -97,6 +100,7 @@ export default function UsersForm(props) {
             value={values.lastName}
             onChange={handleInputChange}
             error={errors.lastName}
+            required
           ></controls.Input>
           <controls.Input
             label="email"
@@ -104,6 +108,7 @@ export default function UsersForm(props) {
             value={values.email}
             onChange={handleInputChange}
             error={errors.email}
+            required
           ></controls.Input>
           <controls.Input
             label="Business"
@@ -111,6 +116,7 @@ export default function UsersForm(props) {
             value={values.businessName}
             onChange={handleInputChange}
             error={errors.businessName}
+            required
           ></controls.Input>
           <controls.Input
             label="Domain_Name"
@@ -118,20 +124,21 @@ export default function UsersForm(props) {
             value={values.domain_name}
             onChange={handleInputChange}
             error={errors.domain_name}
+            required
           ></controls.Input>
         </Grid>
 
         <Grid item xs={6}>
           <div>
-            {/* // <UploadLogo
-            //   pic={logo}
-            //   setPic={setlogo}
-            //   postDetails={postDetails}
-            //   darkColor={darkColor}
-            //   setdarkColor={setdarkColor}
-            //   lightColor={lightColor}
-            //   setlightColor={setlightColor}
-            />*/}
+            <UploadLogo
+              pic={logo}
+              setPic={setlogo}
+              postDetails={postDetails}
+              darkColor={darkColor}
+              setdarkColor={setdarkColor}
+              lightColor={lightColor}
+              setlightColor={setlightColor}
+            />
             <controls.Button type="submit" text="Submit" />
             <controls.Button text="Reset" color="error" onClick={resetForm} />
           </div>

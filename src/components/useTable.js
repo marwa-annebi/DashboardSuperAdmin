@@ -15,12 +15,22 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "cerapro-Medium",
 
     "& thead th": {
-      fontWeight: "600",
-      // color: theme.palette.primary.main,
-      // color:"#"
+      // fontWeight: "600",
+      color: "white",
+      // // color:"#"
 
-      //   background: "rgba(255, 215, 0, 0.33)",
-      background: "rgba(87, 11, 3, 0.05)",
+      // //   background: "rgba(255, 215, 0, 0.33)",
+      // background: "rgba(87, 11, 3, 0.05)",
+      backgroundColor: "#373535",
+
+      // borderRadius: "10px",
+      "&  th": {
+        // borderRadius: "20px",
+        // border: " 4px solid #d2d2d2",
+      },
+      // "& th:last-child": {
+      //   borderRadius: "20px",
+      // },
       fontFamily: "cerapro-Medium",
     },
     "& tbody td": {
@@ -30,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#fffbf2",
       cursor: "pointer",
     },
+    // "& tbody tr": {
+    //   borderRadius: "10px",
+    // },
   },
 }));
 
